@@ -20,9 +20,9 @@
 <div class="container-fluid" id="app">
     <div class="row flex-nowrap">
         @include('blocks.sidebar')
-        <div class="col py-3">
+        <div class="col py-3" style="background-color: rgba(242, 246, 250, 1)">
             @include('blocks.navbar')
-            <div class="content">
+            <div class="content" style="background-color: rgba(242, 246, 250, 1)">
                 @yield('page-content')
             </div>
         </div>

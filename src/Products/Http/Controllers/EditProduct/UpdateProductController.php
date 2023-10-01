@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Src\Products\Http\Controllers;
+namespace Src\Products\Http\Controllers\EditProduct;
 
 
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -22,7 +22,7 @@ class UpdateProductController
                 $request->get('article'),
                 $request->get('name'),
                 ProductStatus::from($request->get('status')),
-                $request->get('date')
+                $request->get('attributes')
             ));
         } catch (ModelNotFoundException $e) {
             return redirect()->back()->withErrors(['Ресурс не найден']);

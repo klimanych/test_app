@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Src\Products\Http\Controllers;
+namespace Src\Products\Http\Controllers\EditProduct;
 
 
 use Src\Products\Model\Product;

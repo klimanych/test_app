@@ -1,9 +1,9 @@
 @extends('layouts.main')
 
 @section('page-content')
-    <div class="row">
+    <div class="row" style="background-color: rgba(242, 246, 250, 1)">
         <div class="col-md-7">
-            <table class="table" id="table">
+            <table  id="table">
                 <thead>
                 <tr>
                     <th>
@@ -36,6 +36,26 @@
 
 @push('page-scripts')
     <script type="module">
-        $('#table').DataTable()
+        $('#table').DataTable({
+            ajax: {
+                url: '{{route('products.list')}}',
+                type: 'get'
+            },
+            columns: [
+                {data: 'article', name: 'article'},
+                {data: 'name', name: 'name'},
+                {data: 'status',name:'status'},
+                {data: 'data', name: 'data'}
+            ],
+            columnDefs: [
+
+            ],
+            processing: true,
+            serverSide: true,
+            searching:false,
+            paging:false,
+            ordering:false,
+            info:false
+        })
     </script>
 @endpush()

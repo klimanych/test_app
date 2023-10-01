@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Src\Products\Http\Controllers;
+namespace Src\Products\Http\Controllers\CreateProduct;
 
 
 use Illuminate\Http\RedirectResponse;
@@ -25,7 +25,7 @@ class StoreProductController
                 $request->get('article'),
                 $request->get('name'),
                 ProductStatus::from($request->get('status')),
-                $request->get('data')
+                $request->get('attributes')
             ));
         } catch (ProductArticleExistsException $e) {
             return redirect()->back()->withErrors(['article' => $e->getMessage()]);
