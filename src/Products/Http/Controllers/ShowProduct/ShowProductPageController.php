@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Src\Products\Http\ShowProduct;
+namespace Src\Products\Http\Controllers\ShowProduct;
 
 
 use App\Http\Controllers\Controller;

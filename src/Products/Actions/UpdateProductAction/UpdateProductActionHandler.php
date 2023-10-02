@@ -32,7 +32,7 @@ class UpdateProductActionHandler
             'article' => $action->getArticle(),
             'name' => $action->getName(),
             'status' => $action->getStatus(),
-            'data' => array_values($action->getData())
+            'data' => $action->getData() ? array_values($action->getData()) : null
         ];
 
         $product->fill($attributes);

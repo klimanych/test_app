@@ -14,7 +14,8 @@
                 <div class="row">
                     <div class="col-md-12">
                         <label for="article"> Артикул <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control @if($errors->has('article')) is-invalid @endif" id="article" name="article" value="{{ $product['article'] }}" required>
+                        <input type="text" class="form-control @if($errors->has('article')) is-invalid @endif"
+                               id="article" name="article" value="{{ $product['article'] }}" required>
 
                         @if($errors->has('article'))
                             <div class="invalid-feedback">
@@ -29,7 +30,14 @@
                 <div class="row">
                     <div class="col-md-12">
                         <label for="name"> Наименование <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control @if($errors->has('name')) is-invalid @endif" id="name" name="name" value="{{ $product['name'] }}" required>
+                        <input type="text" class="form-control @if($errors->has('name')) is-invalid @endif" id="name"
+                               name="name" value="{{ $product['name'] }}" required>
+
+                        @if($errors->has('name'))
+                            <div class="invalid-feedback">
+                                {{ $errors->get('name')[0] }}
+                            </div>
+                        @endif
                     </div>
                 </div>
                 <br>
@@ -39,7 +47,8 @@
                         <label for="status"> Статус <span class="text-danger">*</span></label>
                         <select class="form-select" name="status" id="status">
                             @foreach(\Src\Products\Enums\ProductStatus::cases() as $case)
-                                <option value="{{$case->value}}" @if($case->value == $product['status']) selected @endif>{{$case->value}}</option>
+                                <option value="{{$case->value}}"
+                                        @if($case->value == $product['status']) selected @endif>{{trans('Products::'.$case->value)}}</option>
                             @endforeach
                         </select>
                     </div>
@@ -47,9 +56,11 @@
                 <br>
                 <div class="row">
                     <div class="col-md-12" id="attributes">
-                        @foreach($product['data'] as $key => $attribute)
-                            @include('Products::common.attribute',['index' => $key,'name' => $attribute['name'],'value' => $attribute['value']])
-                        @endforeach
+                        @if($product['data'])
+                            @foreach($product['data'] as $key => $attribute)
+                                @include('Products::common.attribute',['index' => $key,'name' => $attribute['name'],'value' => $attribute['value']])
+                            @endforeach
+                        @endif
                     </div>
                 </div>
                 <br>
@@ -83,11 +94,11 @@
     <script type="module">
         var attributes = 0
 
-        $('#createAttribute').on('click',function() {
+        $('#createAttribute').on('click', function () {
             var block = $('.attribute_row').prop('outerHTML')
-            block = block.replaceAll("?",attributes)
-            block = block.replaceAll('style="display: none"','')
-            block = block.replaceAll('row attribute_row','row')
+            block = block.replaceAll("?", attributes)
+            block = block.replaceAll('style="display: none"', '')
+            block = block.replaceAll('row attribute_row', 'row')
             $('#attributes').append(block)
             attributes++
         })

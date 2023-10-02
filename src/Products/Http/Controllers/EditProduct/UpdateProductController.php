@@ -6,15 +6,15 @@ namespace Src\Products\Http\Controllers\EditProduct;
 
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Src\Products\Actions\UpdateProductAction\UpdateProductAction;
 use Src\Products\Actions\UpdateProductAction\UpdateProductActionHandler;
 use Src\Products\Enums\ProductStatus;
 use Src\Products\Exceptions\ProductArticleExistsException;
+use Src\Products\Http\Requests\UpdateProductRequest;
 
 class UpdateProductController
 {
-    public function __invoke(int $id, Request $request, UpdateProductActionHandler $handler): RedirectResponse
+    public function __invoke(int $id, UpdateProductRequest $request, UpdateProductActionHandler $handler): RedirectResponse
     {
         try {
             $handler->handle(new UpdateProductAction(

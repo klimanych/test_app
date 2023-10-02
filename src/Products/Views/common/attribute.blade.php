@@ -7,7 +7,8 @@
         <label for="attributes[{{$index}}][value]"> Значение </label>
         <input type="text" class="form-control" name="attributes[{{$index}}][value]" required value="{{$value}}">
     </div>
-    <div class="col-md-1 text-center justify-content-center">
+    <div class="col-md-1">
+        <label for=""></label>
         <a href="#" class="delete_attribute" onclick="$(this).parent().parent().remove()"><span><i class="fs-4 bi-trash"></i></span></a>
     </div>
 </div>

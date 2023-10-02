@@ -6,7 +6,15 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    {{$model['name']}}
+                    <span style="float: left">
+                        {{$model['name']}}
+                    </span>
+                    <div style="float: right">
+                        <a href="{{route('products.edit-page',$model['id'])}}" style="margin-right: 5px"><span><i
+                                    class="fs-4 bi-pencil"></i></span></a>
+                        <a href="#" id="deleteButton"><span><i
+                                    class="fs-4 bi-trash"></i></span></a>
+                    </div>
                 </div>
                 <div class="card-body">
                     <div class="row">
@@ -33,19 +41,44 @@
                             {{$model['status']}}
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-md-1">
-                            <span>Атрибуты</span>
-                        </div>
-                        <div class="col-md-3">
-                            @foreach($model['data'] as $attribute)
-                                {{$attribute['name']}}: {{$attribute['value']}}
+                    @if($model['data'])
+                        <div class="row">
+                            <div class="col-md-1">
+                                <span>Атрибуты</span>
+                            </div>
+                            <div class="col-md-3">
+                                @foreach($model['data'] as $attribute)
+                                    {{$attribute['name']}}: {{$attribute['value']}}
                                 @endforeach
+                            </div>
                         </div>
-                    </div>
+                    @endif
                 </div>
             </div>
         </div>
     </div>
 
 @endsection
+
+
+@push('page-scripts')
+    <script type="module">
+        $('#deleteButton').on('click', function(e) {
+            $.ajax({
+                url: '{{route('products.delete', $model['id'])}}',
+                method: 'DELETE',
+                headers: {
+                    'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function (res) {
+                    console.log('success')
+                    window.location.href = '{{route('products.list-page')}}'
+                },
+                error: function () {
+                    console.log('error')
+                }
+            });
+
+        })
+    </script>
+@endpush

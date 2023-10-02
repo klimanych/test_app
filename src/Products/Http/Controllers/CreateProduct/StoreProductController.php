@@ -10,15 +10,16 @@ use Src\Products\Actions\StoreProductAction\StoreProductAction;
 use Src\Products\Actions\StoreProductAction\StoreProductActionHandler;
 use Src\Products\Exceptions\ProductArticleExistsException;
 use Src\Products\Enums\ProductStatus;
+use Src\Products\Http\Requests\StoreProductRequest;
 
 class StoreProductController
 {
     /**
-     * @param Request $request
+     * @param StoreProductRequest $request
      * @param StoreProductActionHandler $handler
      * @return RedirectResponse
      */
-    public function __invoke(Request $request, StoreProductActionHandler $handler): RedirectResponse
+    public function __invoke(StoreProductRequest $request, StoreProductActionHandler $handler): RedirectResponse
     {
         try {
             $handler->handle(new StoreProductAction(

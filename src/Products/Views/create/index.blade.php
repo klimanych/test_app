@@ -34,6 +34,12 @@
                         <label for="name"> Название </label>
                         <input type="text" class="form-control @if($errors->has('name')) is-invalid @endif" id="name"
                                name="name" value="{{ old('name') }}" required>
+
+                        @if($errors->has('name'))
+                            <div class="invalid-feedback">
+                                {{ $errors->get('name')[0] }}
+                            </div>
+                        @endif
                     </div>
                 </div>
                 <br>
@@ -43,7 +49,7 @@
                         <label for="status"> Статус</label>
                         <select class="form-select" name="status" id="status">
                             @foreach(\Src\Products\Enums\ProductStatus::cases() as $case)
-                                <option value="{{$case->value}}">{{$case->value}}</option>
+                                <option value="{{$case->value}}">{{trans('Products::'.$case->value)}}</option>
                             @endforeach
                         </select>
                     </div>
